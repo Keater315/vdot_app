@@ -1,0 +1,11 @@
+# Netlify's build image doesn't ship Flutter, so install the latest stable SDK before building.
+[build]
+  command = """
+    set -e
+    bash scripts/install_flutter.sh
+    export PATH="$PATH:$HOME/flutter/bin"
+    flutter config --no-analytics
+    flutter pub get
+    flutter build web --release
+  """
+  publish = "build/web"
